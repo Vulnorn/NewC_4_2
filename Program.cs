@@ -30,20 +30,20 @@
 
             Console.SetCursorPosition(0, position);
             Console.Write($"{openBar}");
-
-            for (int i = 0; i < lengthFilledBar; i++)
-            {
-                bar[i] = filledBar;
-                Console.Write($"{bar[i]}");
-            }
-
-            for (int i = lengthFilledBar - 1; i < lengthBar; i++)
-            {
-                bar[i] = nullBar;
-                Console.Write($"{bar[i]}");
-            }
-
+            FillBar(bar,0, lengthFilledBar, filledBar);
+            FillBar(bar, lengthFilledBar, lengthBar, nullBar);
             Console.Write($"{closeBar}");
+        }
+
+        static char[] FillBar(char[] simbols,int startPosition , int leanghtFill, char simbol)
+        {
+            for (int i = startPosition; i < leanghtFill; i++)
+            {
+                simbols[i] = simbol;
+                Console.Write($"{simbols[i]}");
+            }
+
+            return simbols;
         }
 
         static int СountFilling(int lengthBar, string nameBar)
@@ -76,14 +76,14 @@
 
                 if (int.TryParse(userInput, out enterNumber) == false)
                     Console.WriteLine("Не корректный ввод.");
-                else if (CheckRange(enterNumber, lowerLimitRangeNumbers, upperLimitRangeNumbers))
+                else if (GetNumberInRange(enterNumber, lowerLimitRangeNumbers, upperLimitRangeNumbers))
                     isEnterNumber = false;
             }
 
             return enterNumber;
         }
 
-        private static bool CheckRange(int number, int lowerLimitRangeNumbers, int upperLimitRangeNumbers)
+        private static bool GetNumberInRange(int number, int lowerLimitRangeNumbers, int upperLimitRangeNumbers)
         {
             if (number < lowerLimitRangeNumbers)
             {
